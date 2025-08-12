@@ -22,7 +22,7 @@ const StoryModel = ({ setShowModal, fetchStories }) => {
   const { getToken } = useAuth();
 
   const MAX_VIDEO_DURATION = 60; // 60 seconds
-  const MAX_VIDEO_SIZE_MB = 50; // MB
+  const MAX_VIDEO_SIZE_MB = 100; // MB
 
   const handleMediaUpload = (e) => {
     const file = e.target.files?.[0];
