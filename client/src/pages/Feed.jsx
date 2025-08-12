@@ -48,10 +48,10 @@ const Feed = () => {
       </div>
 
       {/* Right Sidebar */}
-      <div className="max-xl:hidden sticky top-0">
+      <div className="max-xl:hidden sticky top-0 h-screen overflow-hidden hover:overflow-y-auto">
         <div className="max-w-xs bg-white text-xs p-4 rounded-md inline-flex flex-col gap-2 shadow">
-          <h3 className="text-slate-800 font-semibold">Sponsored</h3>
-          <a href="https://rapid-ai-beta.vercel.app/" target="_blank">
+          <h3 className="text-slate-800 font-semibold">AI Featured</h3>
+          <a href="https://rapid-ai-beta.vercel.app" target="_blank">
             <img
               src={assets.sponsored_img}
               className="w-75 h-50 rounded-md"
@@ -64,7 +64,26 @@ const Feed = () => {
             built for results.
           </p>
         </div>
-        <RecentMessages />
+
+        <div className="mb-4">
+          <RecentMessages />
+        </div>
+
+        <div className="max-w-xs bg-white text-xs p-4 rounded-md inline-flex flex-col gap-2 shadow">
+          <h3 className="text-slate-800 font-semibold">Appointment Featured</h3>
+          <a href="https://perskripsi.vercel.app" target="_blank">
+            <img
+              src={assets.sponsored_img2}
+              className="w-75 h-50 rounded-md object-cover"
+              alt=""
+            />
+          </a>
+          <p className="text-slate-600">Doctor Appointment</p>
+          <p className="text-slate-400">
+            Book your health in seconds — a simple, powerful platform for
+            stress-free doctor appointments.
+          </p>
+        </div>
       </div>
     </div>
   ) : (
