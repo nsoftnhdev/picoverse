@@ -74,7 +74,7 @@ export const updateUserData = async (req, res) => {
 
       const response = await imagekit.upload({
         file: buffer,
-        fileName: profile.originalname,
+        fileName: cover.originalname,
       });
 
       const url = imagekit.url({

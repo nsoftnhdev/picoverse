@@ -1,12 +1,61 @@
+import { useAuth } from "@clerk/clerk-react";
 import { MapPin, MessageCircle, Plus, UserPlus } from "lucide-react";
-import { dummyUserData } from "../assets/assets";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import api from "../api/axios";
+import { fetchUser } from "../features/user/userSlice";
+import toast from "react-hot-toast";
 
 const UserCard = ({ user }) => {
-  const currentUser = dummyUserData;
+  const { getToken } = useAuth();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const currentUser = useSelector((state) => state.user.value);
 
-  const handleFollow = async () => {};
+  const handleFollow = async () => {
+    try {
+      const { data } = await api.post(
+        "/api/user/follow",
+        { id: user._id },
+        {
+          headers: { Authorization: `Bearer ${await getToken()}` },
+        }
+      );
 
-  const handleConnectionRequest = async () => {};
+      if (data.success) {
+        toast.success(data.message);
+        dispatch(fetchUser(await getToken()));
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
+
+  const handleConnectionRequest = async () => {
+    if (currentUser.connections.includes(user._id)) {
+      return navigate("/messages/" + user._id);
+    }
+
+    try {
+      const { data } = await api.post(
+        "/api/user/connect",
+        { id: user._id },
+        {
+          headers: { Authorization: `Bearer ${await getToken()}` },
+        }
+      );
+
+      if (data.success) {
+        toast.success(data.message);
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
 
   return (
     <div
@@ -17,7 +66,7 @@ const UserCard = ({ user }) => {
         <img
           src={user.profile_picture}
           alt=""
-          className="rounded-full w-16 shadow-md mx-auto"
+          className="rounded-full w-16 h-16 object-cover shadow-md mx-auto"
         />
         <p className="mt-4 font-semibold">{user.full_name}</p>
         {user.username && (
@@ -51,7 +100,10 @@ const UserCard = ({ user }) => {
         </button>
 
         {/* Connection Request Button / Message Button */}
-        <button onClick={handleConnectionRequest} className="flex items-center justify-center w-16 border text-slate-500 group rounded-md cursor-pointer active:scale-95 transition">
+        <button
+          onClick={handleConnectionRequest}
+          className="flex items-center justify-center w-16 border text-slate-500 group rounded-md cursor-pointer active:scale-95 transition"
+        >
           {currentUser?.connections.includes(user._id) ? (
             <MessageCircle className="w-5 h-5 group-hover:scale-105 transition" />
           ) : (
