@@ -33,7 +33,7 @@ const Login = () => {
             </div>
           </div>
           <h1 className="text-3xl md:text-6xl md:pb-2 font-bold bg-gradient-to-r from-blue-800 to-blue-600 bg-clip-text text-transparent">More than just friends truly connect</h1>
-          <p className="text-xl md:text-3xl text-blue-800 max-w-72 md:max-w-md">connect with global community on inqverse.</p>
+          <p className="text-xl md:text-3xl text-blue-800 max-w-72 md:max-w-md">connect with global community on Picoverse.</p>
         </div>
         <span className="md:h-10"></span>
       </div>
