@@ -51,7 +51,7 @@ const Feed = () => {
       <div className="max-xl:hidden sticky top-0 h-screen overflow-hidden hover:overflow-y-auto">
         <div className="max-w-xs bg-white text-xs p-4 rounded-md inline-flex flex-col gap-2 shadow">
           <h3 className="text-slate-800 font-semibold">AI Featured</h3>
-          <a href="https://rapid-ai-beta.vercel.app" target="_blank">
+          <a href="https://picoverse-gpt.vercel.app" target="_blank">
             <img
               src={assets.sponsored_img}
               className="w-75 h-50 rounded-md"
